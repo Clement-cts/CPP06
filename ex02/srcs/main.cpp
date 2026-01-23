@@ -7,6 +7,11 @@ int main() {
 
         Base* base = generate();
 
+        if (!base) {
+            std::cerr << "Generation failed" << std::endl;
+            continue;
+        }
+
         std::cout << "\n===== Pointer identification ====" << std::endl;
         identify(base);
         std::cout << "\n===== Reference identification =====" << std::endl;
