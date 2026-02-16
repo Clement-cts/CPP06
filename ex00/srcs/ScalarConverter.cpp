@@ -26,7 +26,7 @@ static void printChar (double d) {
     else if (!std::isprint(static_cast<int>(d)))
         std::cout << "char: Non displayable\n";
     else
-        std::cout << "char: " << static_cast<char>(d) << " \n";
+        std::cout << "char: \'" << static_cast<char>(d) << "\' \n";
 }
 
 static void printInt(double d) {
@@ -61,7 +61,7 @@ static void printDouble(double d) {
     else if (d == -1.0 / 0.0)
         std::cout << "double: -inf\n";
     else {
-        std::cout << "float: " << d;
+        std::cout << "double: " << d;
         if (d == static_cast<int>(d))   
             std::cout << ".0";
         std::cout << "\n";
