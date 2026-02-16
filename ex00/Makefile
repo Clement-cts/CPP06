@@ -1,12 +1,13 @@
 NAME = Converter
 
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98 
+CXXFLAGS = -Wall -Wextra -Werror -Wconversion -std=c++98 -MMD -MP
 
 SRCS = srcs/main.cpp srcs/ScalarConverter.cpp
 
 OBJ_DIR = build
 OBJS = $(addprefix $(OBJ_DIR)/,$(SRCS:.cpp=.o))
+DEP = $(OBJS:.o=.d)
 
 all: $(NAME)
 
@@ -16,6 +17,7 @@ $(NAME): $(OBJS)
 $(OBJ_DIR)/%.o: %.cpp
 	@mkdir -p $(dir $@)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
+-include $(DEP)
 
 clean:
 	rm -rf $(OBJ_DIR)
