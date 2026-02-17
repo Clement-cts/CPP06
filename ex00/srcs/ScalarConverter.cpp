@@ -14,6 +14,10 @@ static bool isCharLiteral(const std::string &s) {
 static bool isValidNumber(const std::string &s) {
     char *end;
     std::strtod(s.c_str(), &end);
+
+    if (end == s.c_str())
+        return false;
+
     if (*end == 'f' && *(end + 1) == '\0')
         return true;
     return (*end == '\0');
@@ -21,16 +25,16 @@ static bool isValidNumber(const std::string &s) {
 
 //isprint: test is a char is printable or no.
 static void printChar (double d) {
-    if (d < 0 || d > 127 || d!= d)
+    if (d != d || d < 0 || d > 127 || d!= static_cast<int>(d))
         std::cout << "char: impossible\n";
     else if (!std::isprint(static_cast<int>(d)))
         std::cout << "char: Non displayable\n";
     else
-        std::cout << "char: \'" << static_cast<char>(d) << "\' \n";
+        std::cout << "char: '" << static_cast<char>(d) << "'\n";
 }
 
 static void printInt(double d) {
-    if (d < INT_MIN || d > INT_MAX || d != d)
+    if (d != d || d < INT_MIN || d > INT_MAX || d != static_cast<int>(d))
         std::cout << "int: impossible\n";
     else
         std::cout << "int: " << static_cast<int>(d) << "\n";
@@ -47,7 +51,7 @@ static void printFloat(double d) {
         std::cout << "float: -inff\n";
     else {
         std::cout << "float: " << f;
-        if (f == static_cast<int>(f))
+        if (f == static_cast<float>(static_cast<long>(f)))
             std::cout << ".0";
         std::cout << "f\n";
     }
@@ -62,7 +66,7 @@ static void printDouble(double d) {
         std::cout << "double: -inf\n";
     else {
         std::cout << "double: " << d;
-        if (d == static_cast<int>(d))   
+        if (d == static_cast<double>(static_cast<double>(d)))   
             std::cout << ".0";
         std::cout << "\n";
     }
