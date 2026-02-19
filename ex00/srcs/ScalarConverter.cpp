@@ -18,6 +18,9 @@ static bool isValidNumber(const std::string &s) {
     if (end == s.c_str())
         return false;
 
+    while (*end && std::isspace(*end))
+        ++end;
+
     if (*end == 'f' && *(end + 1) == '\0')
         return true;
     return (*end == '\0');
@@ -45,9 +48,9 @@ static void printFloat(double d) {
 
     if (d != d)
         std::cout << "float: nanf\n";
-    else if (d == 1.0 / 0.0)
+    else if (f == 1.0f / 0.0f)
         std::cout << "float: +inff\n";
-    else if (d == -1.0 / 0.0)
+    else if (f == -1.0f / 0.0f)
         std::cout << "float: -inff\n";
     else {
         std::cout << "float: " << f;
@@ -66,7 +69,7 @@ static void printDouble(double d) {
         std::cout << "double: -inf\n";
     else {
         std::cout << "double: " << d;
-        if (d == static_cast<double>(static_cast<double>(d)))   
+        if (d == static_cast<double>(static_cast<long>(d)))
             std::cout << ".0";
         std::cout << "\n";
     }
